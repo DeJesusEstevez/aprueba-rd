@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es-DO">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aprueba RD — Simulador del examen teórico de licencia de conducir</title>
+  <meta name="description" content="Practica gratis para el examen teórico de licencia de conducir en República Dominicana. Más de 70 preguntas de señales, normas de la Ley 63-17, prioridad, alcohol y seguridad vial. Modo estudio, examen y repaso. Funciona offline." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#16181D" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Aprueba RD — Practica para el examen de licencia (INTRANT)" />
+  <meta property="og:description" content="Simulador gratis con más de 70 preguntas basadas en la Ley 63-17 y las señales de tránsito. Estudia, hazte exámenes y repasa lo que fallaste. Offline y sin registrarte." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_DO" />
+  <meta property="og:url" content="https://apruebard.netlify.app/" />
+  <meta property="og:site_name" content="Aprueba RD" />
+  <meta property="og:image" content="https://apruebard.netlify.app/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://apruebard.netlify.app/og.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ============ Barra superior ============ -->
+  <div class="topbar" role="region" aria-label="Marca">
+    <div class="topbar__inner">
+      <span class="brand">
+        <span class="brand__mark" aria-hidden="true">RD</span>
+        <span class="brand__name">Aprueba RD</span>
+      </span>
+      <span class="topbar__tag">Simulador del examen teórico · práctica gratis</span>
+    </div>
+  </div>
+
+  <!-- ============ Hero ============ -->
+  <header class="hero" id="inicio">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Examen teórico · Licencia de conducir · República Dominicana</p>
+        <h1 class="hero__title">
+          Llega listo al examen de la
+          <span class="hl">licencia de conducir</span>
+        </h1>
+        <p class="hero__sub">
+          Practica con <strong id="stat-total">70</strong> preguntas de opción múltiple
+          basadas en la <strong>Ley 63-17</strong> y en las señales de tránsito, repartidas en
+          <strong id="stat-cats">8</strong> categorías. Estudia a tu ritmo, hazte exámenes
+          cronometrados y repasa justo lo que fallaste.
+        </p>
+        <div class="hero__cta">
+          <a href="#simulador" class="btn btn--primary" data-scroll>Empezar a practicar</a>
+          <a href="#como" class="btn btn--ghost" data-scroll>¿Cómo funciona?</a>
+        </div>
+        <p class="hero__micro">Gratis · Sin registrarte · Funciona sin internet</p>
+      </div>
+
+      <!-- Tarjeta señal como ancla visual del hero -->
+      <aside class="hero__card" aria-hidden="true">
+        <div class="sign">
+          <div class="sign__diamond">
+            <span class="sign__emoji">🚦</span>
+          </div>
+          <p class="sign__label">Zona de práctica</p>
+        </div>
+        <div class="hero__chips">
+          <span class="chip">Señales</span>
+          <span class="chip">Prioridad</span>
+          <span class="chip">Velocidad</span>
+          <span class="chip">Alcohol</span>
+          <span class="chip">Seguridad</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+  <!-- ============ El problema ============ -->
+  <section class="problema" aria-labelledby="prob-title">
+    <div class="wrap wrap--narrow">
+      <h2 id="prob-title" class="section__title">Reprobar es perder tiempo y dinero</h2>
+      <p class="section__lead">
+        El examen teórico evalúa señales, normas de circulación y seguridad vial. Muchos llegan
+        confiados y fallan en detalles: el significado de una señal, quién tiene la prioridad,
+        qué hacer ante una emergencia. Practicar de antemano te da la seguridad para aprobar de primera.
+      </p>
+      <ul class="bullets">
+        <li><span class="bullets__mark">✓</span> Preguntas del mismo estilo que el examen real.</li>
+        <li><span class="bullets__mark">✓</span> Cada respuesta trae una explicación clara para que entiendas el porqué.</li>
+        <li><span class="bullets__mark">✓</span> Repaso automático de las preguntas que te cuestan.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ LA HERRAMIENTA ============ -->
+  <section class="tool" id="simulador" aria-labelledby="tool-title">
+    <div class="wrap">
+      <h2 id="tool-title" class="section__title">El simulador</h2>
+      <p class="section__lead">Elige un modo y empieza. Tu progreso se guarda solo en este dispositivo.</p>
+
+      <!-- Pestañas -->
+      <div class="tabs" role="tablist" aria-label="Modos del simulador">
+        <button class="tab is-active" role="tab" aria-selected="true" data-tab="estudio">
+          <span class="tab__emoji" aria-hidden="true">📖</span> Estudio
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="examen">
+          <span class="tab__emoji" aria-hidden="true">📝</span> Examen
+        </button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="repaso">
+          <span class="tab__emoji" aria-hidden="true">🔁</span> Repaso
+        </button>
+      </div>
+
+      <!-- Panel: ESTUDIO -->
+      <div class="panel" id="panel-estudio" role="tabpanel">
+        <div class="panel__head">
+          <div class="field">
+            <label for="estudio-categoria">Categoría</label>
+            <select id="estudio-categoria"></select>
+          </div>
+          <p class="panel__hint">Modo estudio: ves la respuesta correcta y su explicación al instante.</p>
+        </div>
+        <div id="estudio-slot" aria-live="polite"></div>
+        <div class="nav">
+          <button type="button" class="btn btn--ghost" id="estudio-prev">← Anterior</button>
+          <span class="nav__pos" id="estudio-pos">—</span>
+          <button type="button" class="btn btn--ghost" id="estudio-next">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- Panel: EXAMEN -->
+      <div class="panel" id="panel-examen" role="tabpanel" hidden>
+        <!-- Config -->
+        <div class="examen-config" id="examen-config">
+          <h3 class="examen-config__h">Configura tu examen</h3>
+          <div class="field">
+            <label for="examen-cantidad">¿Cuántas preguntas?</label>
+            <select id="examen-cantidad">
+              <option value="10">10 preguntas · rápido</option>
+              <option value="20" selected>20 preguntas · recomendado</option>
+              <option value="30">30 preguntas · a fondo</option>
+            </select>
+          </div>
+          <ul class="examen-config__reglas">
+            <li>Preguntas aleatorias de todas las categorías.</li>
+            <li>Se aprueba con <strong>70%</strong> o más.</li>
+            <li>Tienes tiempo limitado (45 s por pregunta).</li>
+            <li>Al terminar, repasas las que fallaste.</li>
+          </ul>
+          <p class="examen-config__mejor" id="examen-mejor">Aún no has hecho tu primer examen.</p>
+          <button type="button" class="btn btn--primary" id="examen-start">Comenzar examen</button>
+
+          <!-- Slot de anuncio (se activa en la app de Google Play con AdMob).
+               En la web queda comentado para no romper la experiencia. -->
+          <!-- <div class="ad-slot" aria-hidden="true">Espacio publicitario (AdMob en la app)</div> -->
+        </div>
+
+        <!-- En curso -->
+        <div class="examen-stage" id="examen-stage" hidden>
+          <div class="examen-bar">
+            <div class="progress">
+              <div class="progress__bar"><span id="examen-prog-fill"></span></div>
+              <span class="progress__text" id="examen-prog-text">Pregunta 1</span>
+            </div>
+            <span class="timer" id="examen-timer" aria-label="Tiempo restante">0:00</span>
+          </div>
+          <div id="examen-slot" aria-live="polite"></div>
+          <div class="examen-actions">
+            <button type="button" class="btn btn--link" id="examen-abandonar">Abandonar</button>
+            <button type="button" class="btn btn--primary" id="examen-next" hidden>Siguiente pregunta</button>
+          </div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="examen-resultado" id="examen-resultado" hidden aria-live="polite"></div>
+      </div>
+
+      <!-- Panel: REPASO -->
+      <div class="panel" id="panel-repaso" role="tabpanel" hidden>
+        <div id="repaso-body" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Cómo funciona / cómo gana dinero ============ -->
+  <section class="como" id="como" aria-labelledby="como-title">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Cómo funciona</p>
+      <h2 id="como-title" class="section__title section__title--light">Tres pasos para aprobar</h2>
+      <div class="steps">
+        <article class="step">
+          <span class="step__n">Paso 1</span>
+          <h3>Estudia por categoría</h3>
+          <p>Repasa señales, prioridad, velocidad, alcohol, documentos y más. Ves la respuesta correcta con su explicación.</p>
+        </article>
+        <article class="step">
+          <span class="step__n">Paso 2</span>
+          <h3>Ponte a prueba</h3>
+          <p>Haz exámenes cronometrados con preguntas aleatorias. Sabrás al instante si apruebas el 70%.</p>
+        </article>
+        <article class="step">
+          <span class="step__n">Paso 3</span>
+          <h3>Repasa lo que fallaste</h3>
+          <p>Las preguntas que fallas se guardan solas. Las repasas hasta dominarlas y salen de tu lista.</p>
+        </article>
+      </div>
+
+      <!-- Tarjeta Pro (monetización) -->
+      <div class="pro">
+        <div class="pro__copy">
+          <span class="pro__badge">Versión Pro · en la app de Google Play</span>
+          <h3 class="pro__h">Lleva tu práctica al siguiente nivel</h3>
+          <ul class="pro__list">
+            <li>Exámenes ilimitados y sin anuncios.</li>
+            <li>Todas las categorías y repaso inteligente.</li>
+            <li>Offline total, siempre en tu bolsillo.</li>
+            <li>Nuevas preguntas y actualizaciones.</li>
+          </ul>
+        </div>
+        <div class="pro__cta">
+          <a class="btn btn--wa"
+             href="https://wa.me/18294418256?text=Hola%2C%20quiero%20la%20versi%C3%B3n%20Pro%20de%20Aprueba%20RD%20(ex%C3%A1menes%20ilimitados%20y%20sin%20anuncios).%20%C2%BFC%C3%B3mo%20la%20consigo%3F"
+             target="_blank" rel="noopener">Quiero la versión Pro</a>
+          <p class="pro__note">Aquí en la web todo es gratis para que practiques. La versión Pro llega con la app en Google Play.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="wrap wrap--narrow">
+      <h2 id="faq-title" class="section__title">Preguntas frecuentes</h2>
+
+      <details class="qa">
+        <summary>¿Estas son las preguntas oficiales del examen?</summary>
+        <p>No. Son preguntas de <strong>práctica</strong> basadas en la Ley 63-17 y en el significado universal de las señales de tránsito. No son material oficial del INTRANT ni de la DIGESETT. Te preparan para el estilo del examen, pero siempre confirma los requisitos y cifras vigentes en el INTRANT.</p>
+      </details>
+
+      <details class="qa">
+        <summary>¿Tengo que pagar o registrarme?</summary>
+        <p>No. Aquí en la web puedes estudiar y hacer exámenes gratis, sin crear cuenta ni dar datos. La versión Pro (exámenes ilimitados, sin anuncios) llegará con la app en Google Play.</p>
+      </details>
+
+      <details class="qa">
+        <summary>¿Funciona sin internet?</summary>
+        <p>Sí. Una vez que abres la página, se guarda en tu dispositivo y puedes practicar sin conexión. Además puedes “instalarla” como app desde el menú de tu navegador.</p>
+      </details>
+
+      <details class="qa">
+        <summary>¿Se guardan mis resultados?</summary>
+        <p>Tu progreso (mejor puntaje y preguntas falladas) se guarda solo en tu navegador, en este dispositivo. No se envía a ningún servidor y nadie más lo ve.</p>
+      </details>
+
+      <details class="qa">
+        <summary>¿Cuántas necesito acertar para aprobar en el simulador?</summary>
+        <p>En el modo examen se aprueba con <strong>70%</strong> o más de respuestas correctas, un umbral común de referencia. Verifica el criterio real de aprobación con el INTRANT.</p>
+      </details>
+    </div>
+  </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="foot">
+    <div class="wrap foot__grid">
+      <div>
+        <p class="foot__brand">Aprueba RD</p>
+        <p class="foot__tag">Practica para el examen teórico de la licencia de conducir en República Dominicana.</p>
+      </div>
+      <div class="foot__links">
+        <p class="foot__h">Enlaces útiles</p>
+        <a href="https://www.intrant.gob.do/" target="_blank" rel="noopener">INTRANT · intrant.gob.do</a>
+        <a href="https://wa.me/18294418256?text=Hola%2C%20tengo%20una%20duda%20sobre%20Aprueba%20RD" target="_blank" rel="noopener">Soporte por WhatsApp</a>
+      </div>
+    </div>
+    <p class="foot__legal">
+      Preguntas de práctica basadas en la Ley 63-17 y el reglamento de tránsito. <strong>No es material oficial
+      del INTRANT ni de la DIGESETT.</strong> Verifica los requisitos y las cifras vigentes en el INTRANT
+      (intrant.gob.do). Tus datos se procesan y guardan solo en tu dispositivo; no se envían a ningún servidor.
+      <span class="foot__copy">© <span id="anio">2026</span> Aprueba RD.</span>
+    </p>
+  </footer>
+
+  <a class="wa-float"
+     href="https://wa.me/18294418256?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20de%20Aprueba%20RD"
+     target="_blank" rel="noopener" aria-label="Escríbeme por WhatsApp">WhatsApp</a>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

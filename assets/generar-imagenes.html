@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es-DO">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aprueba RD — Generar imágenes (iconos + OG)</title>
+  <style>
+    :root {
+      --asphalt: #16181D; --signal: #F5B301; --green: #0F7A42; --paper: #F7F6F2; --ink: #1A1D22;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--paper); color: var(--ink); line-height: 1.5; padding: 2rem 1rem;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; margin: 0 0 .3rem; }
+    p.lead { color: #565d68; margin: 0 0 2rem; }
+    .card {
+      background: #fff; border: 1.5px solid #e4e1d8; border-radius: 16px;
+      padding: 1.4rem; margin-bottom: 1.4rem;
+    }
+    .card h2 { font-size: 1.15rem; margin: 0 0 .8rem; }
+    canvas {
+      max-width: 100%; height: auto; border: 1px solid #e4e1d8; border-radius: 10px;
+      background: #fff; display: block; margin-bottom: 1rem;
+    }
+    button {
+      font: inherit; font-weight: 600; background: var(--signal); color: #2a1e00;
+      border: none; border-radius: 999px; padding: .7rem 1.3rem; cursor: pointer;
+    }
+    button:hover { background: #C98A00; color: #fff; }
+    .row { display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start; }
+    .hint { font-size: .85rem; color: #565d68; background: #fdf1cf; border-radius: 10px; padding: .8rem 1rem; }
+    code { background: #eee; padding: .1rem .35rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Generar imágenes de Aprueba RD</h1>
+    <p class="lead">Pulsa cada botón para descargar el PNG. Guarda los archivos en la carpeta principal de la app (junto a <code>index.html</code>).</p>
+
+    <div class="hint">
+      Necesitas: <strong>icon-192.png</strong>, <strong>icon-512.png</strong> (iconos de la PWA para Google Play)
+      y <strong>og.png</strong> (1200×630, vista previa al compartir en redes/WhatsApp).
+    </div>
+
+    <div class="card">
+      <h2>Iconos de la app (maskable)</h2>
+      <div class="row">
+        <div>
+          <canvas id="c192" width="192" height="192"></canvas>
+          <button data-canvas="c192" data-name="icon-192.png">Descargar icon-192.png</button>
+        </div>
+        <div>
+          <canvas id="c512" width="512" height="512"></canvas>
+          <button data-canvas="c512" data-name="icon-512.png">Descargar icon-512.png</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Imagen social (Open Graph)</h2>
+      <canvas id="cog" width="1200" height="630"></canvas>
+      <button data-canvas="cog" data-name="og.png">Descargar og.png</button>
+    </div>
+  </div>
+
+  <script>
+    "use strict";
+
+    /* ---- Dibuja el icono (rombo ámbar + check verde + RD) ---- */
+    function dibujarIcono(ctx, S) {
+      // Fondo asfalto (a sangre, apto para maskable)
+      ctx.fillStyle = "#16181D";
+      ctx.fillRect(0, 0, S, S);
+
+      const cx = S / 2, cy = S / 2;
+
+      // Rombo ámbar (cuadrado rotado 45°) dentro de la zona segura
+      const half = S * 0.258;      // media diagonal
+      const r = S * 0.078;         // radio de esquina aproximado
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(Math.PI / 4);
+      roundRect(ctx, -half, -half, half * 2, half * 2, r);
+      ctx.fillStyle = "#F5B301";
+      ctx.fill();
+      ctx.lineWidth = S * 0.035;
+      ctx.strokeStyle = "#2a1e00";
+      ctx.stroke();
+      ctx.restore();
+
+      // Check verde (aprobado)
+      ctx.beginPath();
+      ctx.moveTo(S * 0.367, S * 0.512);
+      ctx.lineTo(S * 0.453, S * 0.602);
+      ctx.lineTo(S * 0.641, S * 0.398);
+      ctx.lineWidth = S * 0.066;
+      ctx.strokeStyle = "#0F7A42";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.stroke();
+
+      // Iniciales RD
+      ctx.fillStyle = "#2a1e00";
+      ctx.font = "800 " + (S * 0.137) + "px Archivo, Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "alphabetic";
+      ctx.fillText("RD", cx, S * 0.705);
+    }
+
+    /* ---- Dibuja la imagen Open Graph 1200x630 ---- */
+    function dibujarOG(ctx, W, H) {
+      // Fondo asfalto con degradado radial
+      const g = ctx.createRadialGradient(W * 0.82, H * 0.12, 60, W * 0.82, H * 0.12, W * 0.7);
+      g.addColorStop(0, "#2a2f39");
+      g.addColorStop(1, "#16181D");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+
+      // Línea de carretera discontinua
+      ctx.strokeStyle = "rgba(245,179,1,0.5)";
+      ctx.lineWidth = 10;
+      for (let x = 60; x < 720; x += 140) {
+        ctx.beginPath();
+        ctx.moveTo(x, 560);
+        ctx.lineTo(x + 80, 560);
+        ctx.stroke();
+      }
+
+      // Rombo ámbar a la derecha
+      ctx.save();
+      ctx.translate(960, 300);
+      ctx.rotate(Math.PI / 4);
+      roundRect(ctx, -150, -150, 300, 300, 42);
+      ctx.fillStyle = "#F5B301";
+      ctx.fill();
+      ctx.lineWidth = 20;
+      ctx.strokeStyle = "#2a1e00";
+      ctx.stroke();
+      ctx.restore();
+
+      // Check verde
+      ctx.beginPath();
+      ctx.moveTo(872, 300);
+      ctx.lineTo(924, 354);
+      ctx.lineTo(1036, 232);
+      ctx.lineWidth = 38;
+      ctx.strokeStyle = "#0F7A42";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.stroke();
+
+      // Marca (chip RD + nombre)
+      ctx.fillStyle = "#F5B301";
+      roundRect(ctx, 80, 96, 56, 40, 8);
+      ctx.fill();
+      ctx.fillStyle = "#2a1e00";
+      ctx.font = "800 24px Archivo, Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("RD", 108, 117);
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "800 30px Archivo, Arial, sans-serif";
+      ctx.fillText("Aprueba RD", 152, 118);
+
+      // Titular
+      ctx.textBaseline = "alphabetic";
+      ctx.font = "800 76px Archivo, Arial, sans-serif";
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText("Aprueba el examen", 80, 250);
+      ctx.fillStyle = "#F5B301";
+      ctx.fillText("de tu licencia", 80, 332);
+
+      // Subtítulo
+      ctx.fillStyle = "#aab2bd";
+      ctx.font = "500 30px Inter, Arial, sans-serif";
+      ctx.fillText("Simulador con +70 preguntas · Ley 63-17", 80, 410);
+      ctx.fillText("Estudia · Exáminate · Repasa · Offline", 80, 452);
+
+      // Etiqueta gratis
+      ctx.strokeStyle = "#25D366";
+      ctx.lineWidth = 2.5;
+      roundRect(ctx, 80, 500, 260, 52, 26);
+      ctx.stroke();
+      ctx.fillStyle = "#25D366";
+      ctx.font = "700 22px 'Space Mono', monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("GRATIS · SIN REGISTRO", 210, 534);
+      ctx.textAlign = "left";
+    }
+
+    /* ---- Rectángulo con esquinas redondeadas ---- */
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    /* ---- Render inicial ---- */
+    function render() {
+      dibujarIcono(document.getElementById("c192").getContext("2d"), 192);
+      dibujarIcono(document.getElementById("c512").getContext("2d"), 512);
+      dibujarOG(document.getElementById("cog").getContext("2d"), 1200, 630);
+    }
+
+    // Espera a que la fuente esté disponible (mejora el texto) y dibuja.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(render);
+    }
+    render();
+
+    /* ---- Descargas ---- */
+    document.querySelectorAll("button[data-canvas]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const canvas = document.getElementById(btn.dataset.canvas);
+        const a = document.createElement("a");
+        a.download = btn.dataset.name;
+        a.href = canvas.toDataURL("image/png");
+        a.click();
+      });
+    });
+  </script>
+</body>
+</html>

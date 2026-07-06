@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Aprueba RD — Simulador del examen de licencia">
+  <defs>
+    <radialGradient id="glow" cx="82%" cy="12%" r="70%">
+      <stop offset="0%" stop-color="#2a2f39"/>
+      <stop offset="100%" stop-color="#16181D"/>
+    </radialGradient>
+  </defs>
+  <!-- Fondo asfalto -->
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- Línea de carretera discontinua (borde inferior) -->
+  <g stroke="#F5B301" stroke-width="10" opacity="0.5">
+    <line x1="60" y1="560" x2="140" y2="560"/>
+    <line x1="200" y1="560" x2="280" y2="560"/>
+    <line x1="340" y1="560" x2="420" y2="560"/>
+    <line x1="480" y1="560" x2="560" y2="560"/>
+    <line x1="620" y1="560" x2="700" y2="560"/>
+  </g>
+
+  <!-- Señal en rombo (columna derecha) -->
+  <g transform="translate(960 300) rotate(45)">
+    <rect x="-150" y="-150" width="300" height="300" rx="42" fill="#F5B301" stroke="#2a1e00" stroke-width="20"/>
+  </g>
+  <path d="M872 300 l52 54 l112 -122"
+        fill="none" stroke="#0F7A42" stroke-width="38"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Marca -->
+  <g transform="translate(80 96)">
+    <rect x="0" y="0" width="56" height="40" rx="8" fill="#F5B301"/>
+    <text x="28" y="28" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="24" fill="#2a1e00">RD</text>
+    <text x="72" y="30" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="30" fill="#ffffff">Aprueba RD</text>
+  </g>
+
+  <!-- Titular -->
+  <text x="80" y="250" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="76" fill="#ffffff">Aprueba el examen</text>
+  <text x="80" y="332" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="76" fill="#F5B301">de tu licencia</text>
+
+  <!-- Subtítulo -->
+  <text x="80" y="410" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="30" fill="#aab2bd">Simulador con +70 preguntas · Ley 63-17</text>
+  <text x="80" y="452" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="30" fill="#aab2bd">Estudia · Examínate · Repasa · Offline</text>
+
+  <!-- Etiqueta gratis -->
+  <g transform="translate(80 500)">
+    <rect x="0" y="0" width="230" height="52" rx="26" fill="none" stroke="#25D366" stroke-width="2.5"/>
+    <text x="115" y="34" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="22" fill="#25D366">GRATIS · SIN REGISTRO</text>
+  </g>
+</svg>
